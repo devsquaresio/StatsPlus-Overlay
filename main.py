@@ -7,12 +7,9 @@ delay = 0.05
 
 # Modules
 try:
-    import platform
     import os
     import time
     import json
-    from threading import Thread
-    import logging
     import json
     import sys
     import tkinter
@@ -38,10 +35,28 @@ try:
 except:
     print("There was an error importing the required libraries. The program will most likely encounter errors.")
 
+os.system('cls' if os.name == 'nt' else 'clear')
 
 # Auto-Update, Add EXE later...
+# Thanks kopamed for this
+latest_overlay_code = requests.get("https://raw.githubusercontent.com/devsquaresio/StatsPlus-Overlay/main/main.py")
+if latest_overlay_code.status_code == 200:
+    latest_overlay_code = latest_overlay_code.text
+    latest_version = float(latest_overlay_code.split("\n")[0].split("=")[-1])
+    if latest_version > VERSION:
+        print(f"An update is available. {VERSION} -> {latest_version}.Update? [y/n]")
+        u = input("> ")
+        if "n" not in u.lower():
+            with open("main.py", "w") as f:
+                f.write(latest_overlay_code)
+            time.sleep(1)
+            print("Update complete! Re-run the app.")
+            input()
+        else:
+            print("Ignored update.")
 
-
+time.sleep(2)
+os.system('cls' if os.name == 'nt' else 'clear')
 
 print("Welcome to the Stats+ Bedwars Overlay!")
 # Get paths
