@@ -43,6 +43,7 @@ except:
 
 
 
+print("Welcome to the Stats+ Bedwars Overlay!")
 # Get paths
 badlion_client_path = "C:\Program Files\Badlion Client\\"
 lunar_client_path = str(Pathlib.home()) + "\.lunarclient"
