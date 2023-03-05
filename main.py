@@ -67,6 +67,7 @@ vanilla_client_path = str(Pathlib.home()) + "\AppData\Roaming\.minecraft"
 bd_logs = str(Pathlib.home()) + "\AppData\Roaming\.minecraft\logs\\blclient\minecraft\latest.log"
 lunar_logs = str(Pathlib.home()) + "\.lunarclient\offline\multiver\logs\latest.log"
 vn_logs = str(Pathlib.home()) + "\AppData\Roaming\.minecraft\logs\latest.log"
+olunar_logs = str(Pathlib.home()) + "\.lunarclient\offline\logs\latest.log"
 
 confirmed_clients = []
 confirmed_logs = []
@@ -103,6 +104,8 @@ def check_logs(empty_client_list: list) -> list:
         empty_client_list.append("Badlion")
     if os.path.exists(lunar_logs):
         empty_client_list.append("Lunar")
+    if os.path.exists(olunar_logs):
+        empty_client_list.append("Lunar")
     if os.path.exists(vn_logs):
         empty_client_list.append("Vanilla")
 
@@ -131,9 +134,10 @@ if client_choice == "1":
 elif client_choice == "2":
     if os.path.exists(lunar_logs):
         path = lunar_logs
+    elif os.path.exists(olunar_logs):
+        path = olunar_logs
     else:
         print("Log not found")
-        print(f"If the lunar path doesn't work, try this one (for custom): {Pathlib.home()}\.lunarclient\offline\\1.8\logs\latest.log")
 elif client_choice == "3":
     if os.path.exists(vn_logs):
         path = vn_logs
