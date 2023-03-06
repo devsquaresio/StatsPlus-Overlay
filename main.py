@@ -1,4 +1,4 @@
-VERSION=0.51
+VERSION=0.52
 
 delay = 0.05
 
@@ -42,6 +42,11 @@ except:
     logging.critical("PACKAGES WEREN'T ABLE TO BE IMPORTED PROPERLY")
 
 os.system('cls' if os.name == 'nt' else 'clear')
+time.sleep(2)
+print('DONT CHANGE THE NAME OF ANY OF THE FILES!')
+time.sleep(2)
+os.system('cls' if os.name == 'nt' else 'clear')
+time.sleep(2)
 
 # Auto-Update, Add EXE later...
 # Thanks kopamed for this
