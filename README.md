@@ -1,5 +1,8 @@
 # StatsPlus-Overlay
 
+## Version 0.53
+Little optimization...
+
 ## Version 0.52
 Helpful message added (Don't change file names!)
 
