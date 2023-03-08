@@ -10,7 +10,6 @@ try:
     import os
     import time
     import json
-    import json
     import sys
     import tkinter
     import logging
