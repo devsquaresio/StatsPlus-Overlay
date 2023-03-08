@@ -1,10 +1,10 @@
-VERSION=0.52
+VERSION=0.53
+
 
 delay = 0.05
 
+
 # Demo: Basic stats features, grabs everyone in games
-
-
 # Modules
 try:
     import os
@@ -14,32 +14,36 @@ try:
     import sys
     import tkinter
     import logging
+
     os.system('cls' if os.name == 'nt' else 'clear')
 
     logging.basicConfig(level=logging.DEBUG, format="{asctime} {levelname:<8} {message}", style='{', filename='debug.log', filemode='a')
 
-
-
     def install_package(pk):
         os.system(f"{sys.executable} -m pip install {pk}")
+
     try:
         import requests
     except ModuleNotFoundError:
         install_package("requests")
         import requests
+
     try:
         from pathlib import Path as Pathlib
     except ModuleNotFoundError:
         install_package ("pathlib")
         from pathlib import Path as Pathlib
+
     try:
         import customtkinter as ctk
     except ModuleNotFoundError:
         install_package("customtkinter")
         import customtkinter as ctk
+
 except:
     print("There was an error importing the required libraries. The program will most likely encounter errors.")
     logging.critical("PACKAGES WEREN'T ABLE TO BE IMPORTED PROPERLY")
+
 
 os.system('cls' if os.name == 'nt' else 'clear')
 time.sleep(2)
@@ -47,6 +51,7 @@ print('DONT CHANGE THE NAME OF ANY OF THE FILES!')
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
 time.sleep(2)
+
 
 # Auto-Update, Add EXE later...
 # Thanks kopamed for this
@@ -68,20 +73,21 @@ if latest_overlay_code.status_code == 200:
             print("Ignored update.")
             logging.debug(f"Update version {latest_version} ignored.")
 
+
+
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
+
 
 print("Welcome to the Stats+ Bedwars Overlay!")
 # Get paths
 badlion_client_path = "C:\Program Files\Badlion Client\\"
 lunar_client_path = str(Pathlib.home()) + "\.lunarclient"
 vanilla_client_path = str(Pathlib.home()) + "\AppData\Roaming\.minecraft"
-
 bd_logs = str(Pathlib.home()) + "\AppData\Roaming\.minecraft\logs\\blclient\minecraft\latest.log"
 lunar_logs = str(Pathlib.home()) + "\.lunarclient\offline\multiver\logs\latest.log"
 vn_logs = str(Pathlib.home()) + "\AppData\Roaming\.minecraft\logs\latest.log"
 olunar_logs = str(Pathlib.home()) + "\.lunarclient\offline\logs\latest.log"
-
 confirmed_clients = []
 confirmed_logs = []
 
@@ -100,7 +106,6 @@ def check_clients(empty_client_list: list) -> list:
     global badlion_client_path
     global lunar_client_path
     global vanilla_client_path
-
     if os.path.exists(badlion_client_path):
         empty_client_list.append("Badlion")
     if os.path.exists(lunar_client_path):
@@ -112,7 +117,6 @@ def check_logs(empty_client_list: list) -> list:
     global bd_logs
     global lunar_logs
     global vn_logs
-
     if os.path.exists(bd_logs):
         empty_client_list.append("Badlion")
         logging.debug("Badlion client found on computer.")
@@ -125,6 +129,7 @@ def check_logs(empty_client_list: list) -> list:
     if os.path.exists(vn_logs):
         empty_client_list.append("Vanilla")
         logging.debug("Regular Minecraft found on computer.")
+
 
 # Thanks kopamed
 def fix_line(line):
@@ -141,7 +146,9 @@ print("[1] Badlion")
 print("[2] Lunar")
 print("[3] Vanilla")
 print("[4] Custom")
+
 client_choice = input("> ")
+
 if client_choice == "1":
     if os.path.exists(bd_logs):
         path = bd_logs
@@ -151,6 +158,7 @@ if client_choice == "1":
         logging.error("Badlion client not found on computer.")
     
 elif client_choice == "2":
+
     if os.path.exists(lunar_logs):
         path = lunar_logs
         logging.debug("Lunar client logs had been added")
@@ -160,6 +168,7 @@ elif client_choice == "2":
     else:
         print("Log not found")
         logging.error("Lunar client logs not found on computer.")
+
 elif client_choice == "3":
     if os.path.exists(vn_logs):
         path = vn_logs
@@ -167,6 +176,7 @@ elif client_choice == "3":
     else:
         print("Log not found")
         logging.error("Vanilla client logs not found on computer.")
+
 elif client_choice == "4":
     # Check until the path exists
     while True:
@@ -181,12 +191,14 @@ elif client_choice == "4":
             logging.warning("Log not found.")
     path = log_path
 
+
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
 # Todo: Add random tips later
 print("TIP: Don't give your API Key to anyone...")
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
+
 
 # If file exists but empty, then ask to give api key
 if os.path.exists("apikey.txt"):
@@ -212,6 +224,7 @@ if os.path.exists("apikey.txt"):
             print("Api Key found. Join a game of bedwars to try the overlay!")
             logging.info("Api Key saved in file already")
 
+
 # If file doesn't exist, then create it and ask to give api key
 else:
     with open("apikey.txt", "x") as f:
@@ -229,23 +242,24 @@ else:
                         break
             time.sleep(delay)
     
-
-
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
 # ADD MORE TIPS
 print("TIP: Turn on AutoWho mod on Lunar and Badlion. Or, do /who everytime you join for Vanilla\n(NOT MORE THAN ONCE!)")
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
+
+
 print("Join a game to start the overlay!")
 
-readlen = 0
 
+readlen = 0
 # Get length of file
 with open(path, "r") as f:
     readlen = len(f.readlines())
 
 queue = []
+
 player_list = {}
 
 def update_stats(queue, player_list, api_key):
@@ -266,7 +280,7 @@ def update_stats(queue, player_list, api_key):
         else:
             url = f'https://api.mojang.com/users/profiles/minecraft/{player}?'
             # Get uuid
-            response = requests.get(url)
+            response = s.get(url)
             # Tells that player does not exist
             if response.status_code == 204:
                 print(f"{player}: NICKED")
@@ -278,12 +292,9 @@ def update_stats(queue, player_list, api_key):
                     logging.debug(f"{player} has uuid {uuid}")
                     # Use api key to help grab data
                     requestlink = str(f"https://api.hypixel.net/player?key={api_key}&uuid=" + uuid)
-                    hydata = requests.get(requestlink).json()
-
+                    hydata = s.get(requestlink).json()
                     # Self-Explanatory
-
                     lvl = int(hydata['player']['achievements']['bedwars_level'])
-
                     wins = int(hydata['player']['stats']['Bedwars']['wins_bedwars'])
                     losses = int(hydata['player']['stats']['Bedwars']['losses_bedwars'])
                     kills = int(hydata['player']['stats']['Bedwars']['kills_bedwars'])
@@ -291,18 +302,14 @@ def update_stats(queue, player_list, api_key):
                     winstreak = int(hydata['player']['stats']['Bedwars']['winstreak'])
                     final_kills = int(hydata['player']['stats']['Bedwars']['final_kills_bedwars'])
                     final_deaths = int(hydata['player']['stats']['Bedwars']['final_deaths_bedwars'])
-
                     if losses == 0: wl = wins
                     else: wl = round(wins/losses, 2)
                     
                     if deaths == 0: kd = kills
                     else: kd = round(kills/deaths, 2)
-
                     if final_deaths == 0: fkd = final_kills
                     else: fkd = round(final_kills/final_deaths, 2)
-
                     
-
                     try: # Check if has mvp++
                         rank = hydata['player']['monthlyPackageRank']
                     except KeyError:
@@ -310,10 +317,8 @@ def update_stats(queue, player_list, api_key):
                             rank = hydata['player']["newPackageRank"]
                         except KeyError: # Then non
                             rank = "NON"
-
                     if str(rank) == "NONE": # Confirming
                         rank = "NON"
-
                     # Better formatting
                     if str(rank) == "VIP_PLUS":
                         rank = "VIP+"
@@ -321,7 +326,6 @@ def update_stats(queue, player_list, api_key):
                         rank = "MVP+"
                     elif (str(rank) == "SUPERSTAR"):
                         rank = "MVP++"
-
                     player_list[player] = [rank, lvl, winstreak, wl, kd, fkd] # Makes it easy to grab data
                     print(f"[{rank}]{player}, {lvl}: [WINSTREAK: {winstreak}], [WLR: {wl}], [KDR: {kd}], [FKD: {fkd}]")
                     logging.debug(f"Stats for {player} were given.")
@@ -331,12 +335,10 @@ def update_stats(queue, player_list, api_key):
                     print(f"{player}: NICKED")
                     logging.debug(f"{player} was NICKED.")
         
-
-
-
 # File Reader
 while True:
     new_lines = []
+    s = requests.Session()
     with open(path, "r") as f:
         try:
             latest_line = fix_line(f.readlines()[readlen])
@@ -379,21 +381,10 @@ while True:
                     f.write(api_key)
                 logging.info(f"{name} new API key found!")
             readlen += 1
+
         except:
             pass # just doesn't work? 
-            logging.critical("Failure in reading the logs.")
         
         
-
-
     time.sleep(delay) # Todo: Add config file and be able to change settings
-
-# Todo: Make threading
-
-
-
-
-
-
-
 
